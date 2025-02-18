@@ -42,25 +42,6 @@ const MyProfile = () => {
       });
 
 
-    axios
-      .get("https://api.sysdc.uz/api/v1/user/referrals", {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((res) => {
-        setReferrals(res.data.data.length);
-      });
-
-    axios
-      .get("https://api.sysdc.uz/api/v1/user/profile", {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((res) => {
-        setUser(res.data.data);
-        setTelegramStatus(
-          res.data.data.telegram ? "Подключен" : "Не подключен"
-        );
-      });
-
    
     const interval = setInterval(() => {
       setTime(new Date().toLocaleTimeString("ru-RU"));
@@ -192,6 +173,16 @@ const MyProfile = () => {
             <div className="menu">
             • <Link to="/user/email">
              Изменить E-Mail
+              </Link>
+            </div>
+            <div className="menu">
+            • <Link to="/user/tell">
+             Изменить Теллефон номер
+              </Link>
+            </div>
+            <div className="menu">
+            • <Link to="/user/personal">
+             Изменить Персональная информация
               </Link>
             </div>
             <div className="menu">

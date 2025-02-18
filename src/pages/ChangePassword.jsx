@@ -27,11 +27,12 @@ const ChangePassword = () => {
 
     try {
       setLoading(true);
-        await axios.put(
-        "https://api.sysdc.uz/api/v1/user/profile",
+      await axios.put(
+        "https://api.sysdc.uz/api/v1/user/security/password",
         {
-          old_password: oldPassword,
-          new_password: newPassword,
+          old_password: oldPassword, // ✅ Eski parol
+          password: newPassword, // ✅ Yangi parol
+          password_confirmation: confirmPassword, // ✅ Tasdiqlash
         },
         {
           headers: {
@@ -46,8 +47,10 @@ const ChangePassword = () => {
       navigate("/login");
 
     } catch (error) {
+      console.log("API Xatolik:", error.response?.data); // 🔍 Xatoni ko'rish uchun
       if (error.response?.status === 422) {
-        setError("❌ Noto‘g‘ri eski parol kiritildi!");
+        const errorMessage = error.response?.data?.errors?.password?.[0] || "❌ Xato!";
+        setError(errorMessage);
       } else {
         setError("❌ Xatolik yuz berdi: " + (error.response?.data?.message || error.message));
       }
@@ -65,8 +68,8 @@ const ChangePassword = () => {
             <div className="menu">
               <form onSubmit={handleChangePassword}>
                 {error && <p style={{ color: "red" }}>{error}</p>}
-                Действующий пароль:
-                <br />
+                
+                <label>Действующий пароль:</label>
                 <input
                   type="password"
                   value={oldPassword}
@@ -74,8 +77,8 @@ const ChangePassword = () => {
                   maxLength="15"
                   required
                 />
-                <br />Новый пароль:
-                <br />
+
+                <label>Новый пароль:</label>
                 <input
                   type="password"
                   value={newPassword}
@@ -83,8 +86,8 @@ const ChangePassword = () => {
                   maxLength="15"
                   required
                 />
-                <br />Повторите новый пароль:
-                <br />
+
+                <label>Повторите новый пароль:</label>
                 <input
                   type="password"
                   value={confirmPassword}
@@ -92,7 +95,7 @@ const ChangePassword = () => {
                   maxLength="15"
                   required
                 />
-                <br />
+
                 <button className="btn btn-default" type="submit" disabled={loading}>
                   {loading ? "O'zgartirilmoqda..." : "Изменить"}
                 </button>

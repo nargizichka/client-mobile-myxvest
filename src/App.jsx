@@ -34,6 +34,7 @@ import ChangeUser_Information from "./pages/ChangeUser_Information";
 import PrivateRoute from "./routes/PrivateRoute";
 import GuestRoute from "./routes/GuestRoute";
 import NotFound from "./pages/NoutFound";
+import EmailVerification from "./pages/EmailVerify";
 
 function App() {
   return (
@@ -54,6 +55,7 @@ function App() {
             {/* Faqat tizimga kirmaganlar (Guest) sahifalari */}
             <Route path="/registration" element={<GuestRoute element={<RegistrationPage />} />} />
             <Route path="/login" element={<GuestRoute element={<LoginPage />} />} />
+            <Route path="/verify-email" element={<GuestRoute element={<EmailVerification />} />} />
 
             {/* Faqat tizimga kirganlar (Private) sahifalari */}
             <Route path="/mail" element={<PrivateRoute element={<MailPage />} />} />

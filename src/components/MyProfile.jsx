@@ -5,8 +5,8 @@ const MyProfile = () => {
   const token = localStorage.getItem("token");
   const [user, setUser] = useState();
   const [time, setTime] = useState(new Date().toLocaleTimeString("ru-RU"));
-  const [authHistory, setAuthHistory] = useState(null); 
-  const [moneyHistory, setMoneyHistory] = useState(null); 
+  const [authHistory, setAuthHistory] = useState(null);
+  const [moneyHistory, setMoneyHistory] = useState(null);
 
   useEffect(() => {
     axios
@@ -19,7 +19,6 @@ const MyProfile = () => {
         setUser(res.data.data);
       });
 
-   
     axios
       .get("https://api.sysdc.uz/api/v1/user/auth-history", {
         headers: {
@@ -30,7 +29,6 @@ const MyProfile = () => {
         setAuthHistory(res.data.data);
       });
 
-  
     axios
       .get("https://api.sysdc.uz/api/v1/user/payment/history", {
         headers: {
@@ -41,8 +39,6 @@ const MyProfile = () => {
         setMoneyHistory(res.data.data);
       });
 
-
-   
     const interval = setInterval(() => {
       setTime(new Date().toLocaleTimeString("ru-RU"));
     }, 1000);
@@ -50,7 +46,6 @@ const MyProfile = () => {
     return () => clearInterval(interval);
   }, []);
 
- 
   useEffect(() => {
     const updateUserLogin = () => {
       const updatedLogin = localStorage.getItem("userLogin");
@@ -75,9 +70,9 @@ const MyProfile = () => {
               Здравствуйте, {user?.firstname || "Гость"}!
             </div>
             <div className="menu">
-              <b>ID Пользователя</b>: <b>7538</b>
+              <b>ID Пользователя</b>: <b>{user?.id}</b>
               <br />
-              <b>Ваш баланс</b>: <b>0.00 Сум</b>
+              <b>Ваш баланс</b>: <b>{user?.accounts?.amount} Сум</b>
               <br />
               <b>Курс валюты</b>: <b>1 руб. = 145 Сум</b>
               <br />
@@ -85,14 +80,10 @@ const MyProfile = () => {
               <br />
             </div>
             <div className="menu">
-            • <Link to="/pay">
-                Пополнить баланс
-              </Link>
+              • <Link to="/pay">Пополнить баланс</Link>
             </div>
             <div className="menu">
-            • <Link to="/my_orders">
-              Заказы хостингов [0]
-              </Link>
+              • <Link to="/my_orders">Заказы хостингов [0]</Link>
             </div>
             {/* <div className="menu">
               •{" "}
@@ -124,12 +115,9 @@ const MyProfile = () => {
                   ""
                 )}
               </Link>
-             
             </div>
             <div className="menu">
-            • <Link to="/profayl/my_profayl">
-            Профайл
-              </Link>
+              • <Link to="/profayl/my_profayl">Профайл</Link>
             </div>
             {/* <div className="menu">
             • <Link to="/user/promo-code/list">
@@ -166,34 +154,23 @@ const MyProfile = () => {
              
             </div> */}
             <div className="menu">
-            • <Link to="/user/editlogin">
-             Изменить логин
-              </Link>
+              • <Link to="/user/editlogin">Изменить логин</Link>
             </div>
             <div className="menu">
-            • <Link to="/user/email">
-             Изменить E-Mail
-              </Link>
+              • <Link to="/user/email">Изменить E-Mail</Link>
             </div>
             <div className="menu">
-            • <Link to="/user/tell">
-             Изменить Теллефон номер
-              </Link>
+              • <Link to="/user/tell">Изменить Теллефон номер</Link>
             </div>
             <div className="menu">
-            • <Link to="/user/personal">
-             Изменить Персональная информация
-              </Link>
+              •{" "}
+              <Link to="/user/personal">Изменить Персональная информация</Link>
             </div>
             <div className="menu">
-            • <Link to="/user/sett">
-             Изменить пароль
-              </Link>
+              • <Link to="/user/sett">Изменить пароль</Link>
             </div>
             <div className="menu">
-            • <Link to="/user/exit">
-               Выход
-              </Link>
+              • <Link to="/user/exit">Выход</Link>
             </div>
           </div>
           {/* <div className="title">Ваша рефереальная ссылка</div>

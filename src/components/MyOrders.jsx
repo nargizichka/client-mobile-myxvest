@@ -5,11 +5,13 @@ import Up from "../assets/image/png/up.png";
 
 const MyOrders = () => {
   const [servers, setServers] = useState([]);
-
+  // useFetchUserProfile();
   useEffect(() => {
     const fetchServers = async () => {
       try {
-        const response = await axios.get("https://api.sysdc.uz/api/v1/services/hosting/servers");
+        const response = await axios.get(
+          "https://api.sysdc.uz/api/v1/services/hosting/servers"
+        );
         if (response.data.status && Array.isArray(response.data.data)) {
           setServers(response.data.data); // Faqat `data` ichidagi massivni olish
         } else {
@@ -21,7 +23,7 @@ const MyOrders = () => {
     };
 
     fetchServers();
-  }, []); 
+  }, []);
 
   return (
     <div className="mOm">
@@ -29,23 +31,37 @@ const MyOrders = () => {
         servers.map((server, index) => (
           <div key={server.id || index} className="block first">
             <div className="title">
-              <Link to={`/orders/product/infohosting/${server.id}`}>
+              <Link style={{ cursor: "default" }}>
                 {server.name} (ID: {server.id})
+              </Link>
+              <Link
+                className="underlined-link"
+                to={`/orders/product/infohosting/${server.id}`}
+                style={{ marginLeft: "10px" }}
+              >
+                Посмотреть тарифи
               </Link>
             </div>
             <div className="menu">
-              <b>Местоположение:</b> {server.name} {/* Country nomi sifatida ishlatildi */}
+              <b>Местоположение:</b> {server.name}{" "}
+              {/* Country nomi sifatida ishlatildi */}
               <br />
               <b>Процессор:</b> {server.characteristics?.CPU || "Noma'lum"}
               <br />
               <b>ОЗУ:</b> {server.characteristics?.RAM || "Noma'lum"}
               <br />
-              <b>Панель:</b> 
-              <a href={server.information?.PANEL_URL} target="_blank" rel="noopener noreferrer">
-                {" "} {server.information?.PANEL_URL || "Noma'lum"}
+              <b>Панель:</b>
+              <a
+                href={server.information?.PANEL_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {" "}
+                {server.information?.PANEL_URL || "Noma'lum"}
               </a>
               <br />
-              <b>Порты:</b> HTTP {server.ports?.HTTP}, HTTPS {server.ports?.HTTPS}, ISPMANAGER {server.ports?.ISPMANAGER}
+              <b>Порты:</b> HTTP {server.ports?.HTTP}, HTTPS{" "}
+              {server.ports?.HTTPS}, ISPMANAGER {server.ports?.ISPMANAGER}
               <br />
               <b>IP:</b> {server.ip}
               <br />
@@ -54,8 +70,13 @@ const MyOrders = () => {
               <b>NS2:</b> {server.dns?.secondary || "Noma'lum"}
               <br />
               <b>PHPInfo:</b>
-              <a href={`http://${server.ip}/phpinfo.php`} target="_blank" rel="noopener noreferrer">
-                {" "} [посмотреть]
+              <a
+                href={`http://${server.ip}/phpinfo.php`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {" "}
+                [посмотреть]
               </a>
             </div>
           </div>

@@ -23,7 +23,7 @@ const LoginPage = () => {
             <div className="title">Авторизация</div>
             <div className="menu">
               <form onSubmit={handleLogin}>
-                <b>Логин:</b>
+                <b>Электронная почта:</b>
                 <br />
                 <input type="text" name="login" />
                 <br />

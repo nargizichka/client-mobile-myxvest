@@ -1,20 +1,27 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import useFetchUserProfile from "../components/useFetchUserProfile";
 
 const MovementsPage = () => {
   const [history, setHistory] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  useFetchUserProfile();
+
   useEffect(() => {
     const fetchHistory = async () => {
       try {
         const token = localStorage.getItem("token"); // Tokenni localStorage yoki sessionStorage dan olish
-        if (!token) throw new Error("Token topilmadi! Iltimos, qayta login qiling.");
+        if (!token)
+          throw new Error("Token topilmadi! Iltimos, qayta login qiling.");
 
-        const response = await axios.get("https://api.sysdc.uz/api/v1/user/payment/history", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const response = await axios.get(
+          "https://api.sysdc.uz/api/v1/user/payment/history",
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
 
         if (response.data && response.data.data) {
           setHistory(response.data.data); // `data` obyektidan haqiqiy ma'lumotlarni olish
@@ -22,7 +29,9 @@ const MovementsPage = () => {
           throw new Error("Ma'lumotlarni yuklashda xatolik yuz berdi.");
         }
       } catch (err) {
-        setError(`Xatolik: ${err.response ? err.response.data.message : err.message}`);
+        setError(
+          `Xatolik: ${err.response ? err.response.data.message : err.message}`
+        );
       } finally {
         setLoading(false);
       }
@@ -48,7 +57,9 @@ const MovementsPage = () => {
               ) : error ? (
                 <p style={{ color: "red" }}>{error}</p>
               ) : history.length === 0 ? (
-                <p style={{ color: "gray" }}>Sizda hali hech qanday to‘lov harakati yo‘q.</p>
+                <p style={{ color: "gray" }}>
+                  Sizda hali hech qanday to‘lov harakati yo‘q.
+                </p>
               ) : (
                 history.map((item, index) => (
                   <div key={index} className="menu">
@@ -57,12 +68,16 @@ const MovementsPage = () => {
                     </div>
                     <span style={{ color: "#000000" }}>Сумма:</span>{" "}
                     <b>
-                      <span style={{ color: item.amount < 0 ? "red" : "green" }}>
+                      <span
+                        style={{ color: item.amount < 0 ? "red" : "green" }}
+                      >
                         {item.amount} сум
                       </span>
                     </b>
                     <br />
-                    <span style={{ color: "black" }}>Действие: {item.action}</span>
+                    <span style={{ color: "black" }}>
+                      Действие: {item.action}
+                    </span>
                   </div>
                 ))
               )}

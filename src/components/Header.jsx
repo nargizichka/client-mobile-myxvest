@@ -6,8 +6,10 @@ import Reg from "../assets/image/png/reg1.png";
 import User2 from "../assets/image/png/us2.png";
 import Mail from "../assets/image/png/mail.png";
 import N from "../assets/image/png/n.png";
+import useFetchUserProfile from "./useFetchUserProfile";
 const Header = () => {
   const token = localStorage.getItem("token");
+  useFetchUserProfile();
   return (
     <div>
       <header>

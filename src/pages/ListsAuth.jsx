@@ -1,13 +1,15 @@
-import React from 'react'
+import React from "react";
 
-import HistoryAuth from '../components/HistoryAuth'
+import HistoryAuth from "../components/HistoryAuth";
+import useFetchUserProfile from "../components/useFetchUserProfile";
 
 const ListsAuth = () => {
+  useFetchUserProfile();
   return (
     <div>
-        <HistoryAuth/>
+      <HistoryAuth />
     </div>
-  )
-}
+  );
+};
 
-export default ListsAuth
+export default ListsAuth;

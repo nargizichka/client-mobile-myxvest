@@ -6,12 +6,12 @@ const MyXvestHosting = () => {
   const [tarifs, setTarifs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+  // useFetchUserProfile();
   useEffect(() => {
     const fetchTarifs = async () => {
       try {
         const response = await axios.get(
-          "https://api.sysdc.uz/api/v1/services/hosting/tarifs?server_id=1"
+          "https://api.sysdc.uz/api/v1/services/hosting/tarifs?server_id=1&per_page=100"
         );
         setTarifs(response.data.data);
       } catch (err) {

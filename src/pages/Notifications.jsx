@@ -1,6 +1,8 @@
 import Up from "../assets/image/png/up.png";
+import useFetchUserProfile from "../components/useFetchUserProfile";
 
 const Notifications = () => {
+  useFetchUserProfile();
   return (
     <div id="get_ajax_content">
       <div id="set_ajax_content">
@@ -15,10 +17,7 @@ const Notifications = () => {
           </div>
           <div className="menu">
             <a href="/">
-              <img
-                src={Up}
-                alt="На главную"
-              />
+              <img src={Up} alt="На главную" />
               На главную
             </a>
           </div>

@@ -1,6 +1,8 @@
 import Up from "../assets/image/png/up.png";
+import useFetchUserProfile from "../components/useFetchUserProfile";
 
 const Orders = () => {
+  useFetchUserProfile();
   return (
     <div>
       <div className="mOm">
@@ -19,11 +21,7 @@ const Orders = () => {
         </div>
         <div className="menu">
           <a href="/">
-            <img
-              src={Up}
-              alt="Назад"
-            />{" "}
-            На главную
+            <img src={Up} alt="Назад" /> На главную
           </a>
         </div>
       </div>

@@ -1,12 +1,11 @@
-
-import MyProfile from '../components/MyProfile'
+import MyProfile from "../components/MyProfile";
 
 const Profile = () => {
   return (
     <div>
-        <MyProfile />
+      <MyProfile />
     </div>
-  )
-}
+  );
+};
 
-export default Profile
+export default Profile;

@@ -1,5 +1,7 @@
+import useFetchUserProfile from "../components/useFetchUserProfile";
 
 const TelegramAccount = () => {
+  useFetchUserProfile();
   return (
     <div id="get_ajax_content">
       <div id="set_ajax_content">
@@ -12,8 +14,11 @@ const TelegramAccount = () => {
               </center>
             </div>
             <div className="menu">
-              Для подключение телеграм аккаунт отправите код активация на наш бот!<br />
-              <b>Наш бот</b>: @MyXvestRuBot<br />
+              Для подключение телеграм аккаунт отправите код активация на наш
+              бот!
+              <br />
+              <b>Наш бот</b>: @MyXvestRuBot
+              <br />
               <b>Код активация</b>: 03e2b7c34abf9655973421e76160183d
             </div>
           </div>

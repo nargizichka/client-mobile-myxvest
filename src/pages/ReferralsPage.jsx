@@ -1,5 +1,7 @@
+import useFetchUserProfile from "../components/useFetchUserProfile";
 
 const ReferralsPage = () => {
+  useFetchUserProfile();
   return (
     <div id="get_ajax_content">
       <div id="set_ajax_content">
@@ -18,7 +20,7 @@ const ReferralsPage = () => {
               <img
                 src="https://www.myxvest.ru/style/wap/style/image/png/up.png"
                 alt="Na glavnuju"
-              />{' '}
+              />{" "}
               На главную
             </a>
           </div>

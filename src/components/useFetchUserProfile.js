@@ -16,18 +16,25 @@ const useFetchUserProfile = () => {
                 });
 
                 if (!response.data || !response.data.data) {
-                    navigate("/login");
+                    if (window.location.pathname !== "/registration") {
+                        navigate("/login");
+                    }
+
                 }
             } catch (error) {
                 console.error("Error fetching user profile:", error);
-                navigate("/login");
+                if (window.location.pathname !== "/registration") {
+                    navigate("/login");
+                }
             }
         };
 
         if (token) {
             fetchUserProfile();
         } else {
-            navigate("/login");
+            if (window.location.pathname !== "/registration") {
+                navigate("/login");
+            }
         }
     }, [navigate, token]);
 };

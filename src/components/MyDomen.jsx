@@ -1,11 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const MyDomen = () => {
-  return (
-    <div>
-      
-    </div>
-  )
-}
+  return <div></div>;
+};
 
-export default MyDomen
+export default MyDomen;

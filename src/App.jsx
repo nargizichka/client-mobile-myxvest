@@ -35,6 +35,7 @@ import PrivateRoute from "./routes/PrivateRoute";
 import GuestRoute from "./routes/GuestRoute";
 import NotFound from "./pages/NoutFound";
 import EmailVerification from "./pages/EmailVerify";
+import PaymentConfirmation from "./pages/PaymentConfirmation";
 
 function App() {
   return (
@@ -147,7 +148,10 @@ function App() {
               path="/user/personal"
               element={<PrivateRoute element={<ChangeUser_Information />} />}
             />
-
+            <Route
+              path="/pay/confirmation"
+              element={<PrivateRoute element={<PaymentConfirmation />} />}
+            />
             <Route path="*" element={<NotFound />} />
           </Routes>
           <Footer />

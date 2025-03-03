@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Up from "../assets/image/png/up.png";
 const MyXvestHosting = () => {
   const [tarifs, setTarifs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  // useFetchUserProfile();
+
+  const navigate = useNavigate();
+
   useEffect(() => {
     const fetchTarifs = async () => {
       try {
@@ -26,6 +28,10 @@ const MyXvestHosting = () => {
 
   if (loading) return <p>Yuklanmoqda...</p>;
   if (error) return <p>{error}</p>;
+
+  const handleOrderClick = (tarif) => {
+    navigate("/pay/confirmation", { state: { tarif } });
+  };
 
   return (
     <div id="get_ajax_content">
@@ -72,17 +78,18 @@ const MyXvestHosting = () => {
                     <br />
                     <b>Цена в год:</b> {tarif.price["31536000"]} сум
                     <br />
-                    <a
+                    {/* <a
                       href={`/orders/product/hosting/registration/${tarif.id}`}
-                    >
-                      <center>
-                        <input
-                          className="btn btn-default"
-                          type="submit"
-                          value={`Заказать "${tarif.name}"`}
-                        />
-                      </center>
-                    </a>
+                    > */}
+                    <center>
+                      <input
+                        className="btn btn-default"
+                        type="submit"
+                        value={`Заказать "${tarif.name}"`}
+                        onClick={() => handleOrderClick(tarif)}
+                      />
+                    </center>
+                    {/* </a> */}
                   </div>
                 </div>
               );

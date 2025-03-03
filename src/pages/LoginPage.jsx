@@ -1,8 +1,12 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
+
 import Up from "../assets/image/png/up.png";
 import axios from "axios";
 
 const LoginPage = () => {
+  const [message, setMessage] = useState("");
+  const [messageType, setMessageType] = useState("alert alert-success");
   const handleLogin = (e) => {
     e.preventDefault();
     axios
@@ -12,7 +16,27 @@ const LoginPage = () => {
       })
       .then((response) => {
         localStorage.setItem("token", response.data.data.access_token);
-        window.location.replace("/");
+        setMessage("Muvaffaqiyatli kirdingiz!");
+        setMessageType("alert alert-success");
+        setTimeout(() => {
+          window.location.replace("/");
+        }, 2000);
+      })
+      .catch((error) => {
+        console.error(
+          "Login failed!",
+          error.response?.data?.errors?.[0] || "Unknown error"
+        );
+        console.error("Error details:", error.response?.data);
+        if (error?.response?.data?.code === 422)
+          setMessage(
+            "Email yoki password xato. Iltimos tekshirib qaytadan kiriting!"
+          );
+        else setMessage("Xatolik yuz berdi. Iltimos qaytadan urinib ko'ring!");
+        setMessageType("alert alert-danger");
+        setTimeout(() => {
+          setMessage("");
+        }, 3000);
       });
   };
   return (
@@ -22,6 +46,7 @@ const LoginPage = () => {
           <div className="block first">
             <div className="title">Авторизация</div>
             <div className="menu">
+              {message !== "" && <div className={messageType}>{message}</div>}
               <form onSubmit={handleLogin}>
                 <b>Электронная почта:</b>
                 <br />
@@ -55,7 +80,9 @@ const LoginPage = () => {
                 />
               </form>
             </div>
+
             <div className="title">Забыл Пароль?</div>
+
             <div className="menu">
               • <a href="../../../../user/repass.html">Восстановление пароля</a>
               <div>

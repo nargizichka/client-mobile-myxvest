@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const useFetchUserProfile = () => {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     const token = localStorage.getItem("token");
 
     useEffect(() => {
@@ -16,14 +16,13 @@ const useFetchUserProfile = () => {
                 });
 
                 if (!response.data || !response.data.data) {
-                    if (window.location.pathname !== "/registration") {
+                    if (window.location.pathname !== "/registration" && window.location.pathname !== "/") {
                         navigate("/login");
                     }
-
                 }
             } catch (error) {
                 console.error("Error fetching user profile:", error);
-                if (window.location.pathname !== "/registration") {
+                if (window.location.pathname !== "/registration" && window.location.pathname !== "/") {
                     navigate("/login");
                 }
             }
@@ -32,7 +31,7 @@ const useFetchUserProfile = () => {
         if (token) {
             fetchUserProfile();
         } else {
-            if (window.location.pathname !== "/registration") {
+            if (window.location.pathname !== "/registration" && window.location.pathname !== "/") {
                 navigate("/login");
             }
         }

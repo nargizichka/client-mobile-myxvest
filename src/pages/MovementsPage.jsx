@@ -69,7 +69,9 @@ const MovementsPage = () => {
                     <span style={{ color: "#000000" }}>Сумма:</span>{" "}
                     <b>
                       <span
-                        style={{ color: item.amount < 0 ? "red" : "green" }}
+                        style={{
+                          color: item.action === "minus" ? "red" : "green",
+                        }}
                       >
                         {item.amount} сум
                       </span>

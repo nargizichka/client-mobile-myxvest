@@ -173,7 +173,7 @@ const RegistrationPage = () => {
                   value={loading ? "Yuklanmoqda..." : "Зарегистрироваться"}
                   disabled={loading}
                 />
-                <label className="mt-2">
+                <label style={{ marginTop: "5px" }}>
                   У вас уже есть аккаунт? <Link to="/login">Войти</Link> в
                   систему.
                 </label>

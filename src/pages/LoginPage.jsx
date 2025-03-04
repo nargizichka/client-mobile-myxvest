@@ -82,9 +82,9 @@ const LoginPage = () => {
             </div>
 
             <div className="title">Забыл Пароль?</div>
-
+            {/* //../../../../user/repass.html */}
             <div className="menu">
-              • <a href="../../../../user/repass.html">Восстановление пароля</a>
+              • <Link to="/forgot-password">Восстановление пароля</Link>
               <div>
                 • <Link to={"/registration"}>Регистрация</Link>
               </div>

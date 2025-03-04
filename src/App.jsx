@@ -36,6 +36,7 @@ import GuestRoute from "./routes/GuestRoute";
 import NotFound from "./pages/NoutFound";
 import EmailVerification from "./pages/EmailVerify";
 import PaymentConfirmation from "./pages/PaymentConfirmation";
+import PasswordRecovery from "./pages/PasswordRecovery";
 
 function App() {
   return (
@@ -65,6 +66,10 @@ function App() {
             <Route
               path="/verify-email"
               element={<GuestRoute element={<EmailVerification />} />}
+            />
+            <Route
+              path="/forgot-password"
+              element={<GuestRoute element={<PasswordRecovery />} />}
             />
 
             {/* Faqat tizimga kirganlar (Private) sahifalari */}

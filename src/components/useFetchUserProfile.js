@@ -27,7 +27,9 @@ const useFetchUserProfile = () => {
                         && window.location.pathname !== "/payments"
                         && window.location.pathname !== "/verify-email"
                         && window.location.pathname !== "/order"
-                        && window.location.pathname !== "/domen") {
+                        && window.location.pathname !== "/forgot-password"
+                        && window.location.pathname !== "/domen"
+                    ) {
                         navigate("/login");
                     }
                 }
@@ -44,7 +46,8 @@ const useFetchUserProfile = () => {
                     && window.location.pathname !== "/payments"
                     && window.location.pathname !== "/verify-email"
                     && window.location.pathname !== "/order"
-                    && window.location.pathname !== "/domen") {
+                    && window.location.pathname !== "/domen"
+                    && window.location.pathname !== "/forgot-password") {
                     navigate("/login");
                 }
             }
@@ -64,7 +67,9 @@ const useFetchUserProfile = () => {
                 && window.location.pathname !== "/payments"
                 && window.location.pathname !== "/verify-email"
                 && window.location.pathname !== "/order"
-                && window.location.pathname !== "/domen") {
+                && window.location.pathname !== "/domen"
+                && window.location.pathname !== "/forgot-password"
+            ) {
                 navigate("/login");
             }
         }

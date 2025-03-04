@@ -64,7 +64,10 @@ const MovementsPage = () => {
                 history.map((item, index) => (
                   <div key={index} className="menu">
                     <div className="title">
-                      Время: {new Date(item.time).toLocaleString("ru-RU")}
+                      Время:{" "}
+                      {new Date(item.time).toLocaleString("ru-RU", {
+                        timeZone: "UTC",
+                      })}
                     </div>
                     <span style={{ color: "#000000" }}>Сумма:</span>{" "}
                     <b>

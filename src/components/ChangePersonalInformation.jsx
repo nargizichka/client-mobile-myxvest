@@ -6,18 +6,16 @@ import Up from "../assets/image/png/up.png";
 const ChangePersonalInfo = () => {
   const token = localStorage.getItem("token");
 
-  // 🔥 Foydalanuvchi ma’lumotlarini olish va yangilash uchun state-lar
   const [userData, setUserData] = useState({
-    first_name: "",
-    last_name: "",
+    firstname: "",
+    lastname: "",
     email: "",
-    date_of_birth: "",
-    gender: "",
+    birthday: "",
+    sex: "",
   });
 
   const [message, setMessage] = useState("");
 
-  // 🔥 API orqali foydalanuvchi ma’lumotlarini olish (GET)
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -30,10 +28,16 @@ const ChangePersonalInfo = () => {
           }
         );
         if (response.data?.data) {
-          setUserData(response.data.data);
+          setUserData({
+            firstname: response.data.data.firstname || "",
+            lastname: response.data.data.lastname || "",
+            email: response.data.data.email || "",
+            birthday: response.data.data.birthday || "",
+            sex: response.data.data.sex || "",
+          });
         }
       } catch (error) {
-        console.error("Foydalanuvchi ma’lumotlarini olishda xatolik:", error);
+        console.error("Error fetching user data:", error);
       }
     };
 
@@ -42,12 +46,10 @@ const ChangePersonalInfo = () => {
     }
   }, [token]);
 
-  // 🔥 Inputlarni o‘zgartirish
   const handleChange = (e) => {
     setUserData({ ...userData, [e.target.name]: e.target.value });
   };
 
-  // 🔥 Ma’lumotlarni yangilash (PUT orqali)
   const handleUpdate = async (e) => {
     e.preventDefault();
 
@@ -61,11 +63,17 @@ const ChangePersonalInfo = () => {
           },
         }
       );
-      console.log("Yangilash javobi:", response.data);
-      setMessage("Shaxsiy ma’lumotlar muvaffaqiyatli yangilandi! ✅");
+      console.log("Update response:", response.data);
+      setMessage("Shaxsiy ma'lumotlar muvaffaqiyatli o'zgartirildi.");
+      setTimeout(() => {
+        setMessage("");
+      }, 1500);
     } catch (error) {
-      console.error("Yangilashda xatolik:", error.response?.data || error);
-      setMessage("Xatolik yuz berdi. Iltimos, qayta urinib ko‘ring.");
+      console.error("Xatolik :", error.response?.data || error);
+      setMessage("Shaxsiy ma'lumotlarni o'zgartirishda xatolik yuz berdi.");
+      setTimeout(() => {
+        setMessage("");
+      }, 1500);
     }
   };
 
@@ -75,12 +83,13 @@ const ChangePersonalInfo = () => {
         <div className="block first">
           <div className="title">Изменение личных данных</div>
           <div className="menu">
+            {message && <p style={{ color: "green" }}>{message}</p>}
             <form onSubmit={handleUpdate}>
               <label>Имя:</label>
               <input
                 type="text"
-                name="first_name"
-                value={userData.first_name}
+                name="firstname"
+                value={userData.firstname}
                 onChange={handleChange}
                 required
               />
@@ -88,8 +97,8 @@ const ChangePersonalInfo = () => {
               <label>Фамилия:</label>
               <input
                 type="text"
-                name="last_name"
-                value={userData.last_name}
+                name="lastname"
+                value={userData.lastname}
                 onChange={handleChange}
                 required
               />
@@ -106,16 +115,16 @@ const ChangePersonalInfo = () => {
               <label>Дата рождения:</label>
               <input
                 type="date"
-                name="date_of_birth"
-                value={userData.date_of_birth}
+                name="birthday"
+                value={userData.birthday}
                 onChange={handleChange}
                 required
               />
 
               <label>Пол:</label>
               <select
-                name="gender"
-                value={userData.gender}
+                name="sex"
+                value={userData.sex}
                 onChange={handleChange}
                 required
               >
@@ -128,7 +137,6 @@ const ChangePersonalInfo = () => {
                 Сохранить изменения
               </button>
             </form>
-            {message && <p style={{ color: "green" }}>{message}</p>}
           </div>
         </div>
 

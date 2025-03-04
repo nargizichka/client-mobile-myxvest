@@ -16,13 +16,29 @@ const useFetchUserProfile = () => {
                 });
 
                 if (!response.data || !response.data.data) {
-                    if (window.location.pathname !== "/registration" && window.location.pathname !== "/") {
+                    if (window.location.pathname !== "/registration"
+                        && window.location.pathname !== "/"
+                        && window.location.pathname !== "/hostings"
+                        && window.location.pathname !== "/forgot-password"
+                        && window.location.pathname !== "/news"
+                        && window.location.pathname !== "/settings"
+                        && window.location.pathname !== "/rules"
+                        && window.location.pathname !== "/info"
+                        && window.location.pathname !== "/payments") {
                         navigate("/login");
                     }
                 }
             } catch (error) {
                 console.error("Error fetching user profile:", error);
-                if (window.location.pathname !== "/registration" && window.location.pathname !== "/") {
+                if (window.location.pathname !== "/registration"
+                    && window.location.pathname !== "/"
+                    && window.location.pathname !== "/hostings"
+                    && window.location.pathname !== "/forgot-password"
+                    && window.location.pathname !== "/news"
+                    && window.location.pathname !== "/settings"
+                    && window.location.pathname !== "/rules"
+                    && window.location.pathname !== "/info"
+                    && window.location.pathname !== "/payments") {
                     navigate("/login");
                 }
             }
@@ -31,7 +47,15 @@ const useFetchUserProfile = () => {
         if (token) {
             fetchUserProfile();
         } else {
-            if (window.location.pathname !== "/registration" && window.location.pathname !== "/") {
+            if (window.location.pathname !== "/registration"
+                && window.location.pathname !== "/"
+                && window.location.pathname !== "/hostings"
+                && window.location.pathname !== "/forgot-password"
+                && window.location.pathname !== "/news"
+                && window.location.pathname !== "/settings"
+                && window.location.pathname !== "/rules"
+                && window.location.pathname !== "/info"
+                && window.location.pathname !== "/payments") {
                 navigate("/login");
             }
         }

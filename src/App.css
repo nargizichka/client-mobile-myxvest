@@ -1354,3 +1354,22 @@ input.sw:checked + label {
 .radio-group input[type="radio"] {
   margin-right: 5px;
 }
+.payment-logo {
+  max-width: 60px;
+  margin: 0 15px;
+}
+.payment-form {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.payment-form input {
+  padding: 5px 0 5px 0;
+  margin-bottom: 10px;
+}
+.payment-form button {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+}

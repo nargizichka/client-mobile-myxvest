@@ -41,18 +41,23 @@ const ChangePassword = () => {
         }
       );
 
-      alert("✅ Parol muvaffaqiyatli o'zgartirildi! Qayta avtorizatsiya qilish kerak.");
-      
+      alert(
+        "✅ Parol muvaffaqiyatli o'zgartirildi! Qayta avtorizatsiya qilish kerak."
+      );
+
       localStorage.removeItem("token");
       navigate("/login");
-
     } catch (error) {
       console.log("API Xatolik:", error.response?.data); // 🔍 Xatoni ko'rish uchun
       if (error.response?.status === 422) {
-        const errorMessage = error.response?.data?.errors?.password?.[0] || "❌ Xato!";
+        const errorMessage =
+          error.response?.data?.errors?.password?.[0] || "❌ Xato!";
         setError(errorMessage);
       } else {
-        setError("❌ Xatolik yuz berdi: " + (error.response?.data?.message || error.message));
+        setError(
+          "❌ Xatolik yuz berdi: " +
+            (error.response?.data?.message || error.message)
+        );
       }
     } finally {
       setLoading(false);
@@ -66,9 +71,12 @@ const ChangePassword = () => {
           <div className="block first">
             <div className="title">Изменить пароль</div>
             <div className="menu">
-              <form onSubmit={handleChangePassword}>
+              <form
+                onSubmit={handleChangePassword}
+                className="change-data-form"
+              >
                 {error && <p style={{ color: "red" }}>{error}</p>}
-                
+
                 <label>Действующий пароль:</label>
                 <input
                   type="password"
@@ -95,8 +103,12 @@ const ChangePassword = () => {
                   maxLength="15"
                   required
                 />
-
-                <button className="btn btn-default" type="submit" disabled={loading}>
+                <br />
+                <button
+                  className="btn btn-default"
+                  type="submit"
+                  disabled={loading}
+                >
                   {loading ? "O'zgartirilmoqda..." : "Изменить"}
                 </button>
               </form>

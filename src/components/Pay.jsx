@@ -6,6 +6,11 @@ import Humans from "../assets/image/pay/humans.png";
 import Qiwi from "../assets/image/pay/qiwi.png";
 import Payyer from "../assets/image/pay/payeer.png";
 import YandexMoney from "../assets/image/pay/yandex_money.png";
+import Wapkassa from "../assets/image/pay/wapkassa.png";
+import FreeKassa from "../assets/image/pay/freekassa.png";
+import InterKassa from "../assets/image/pay/inter_kassa.png";
+import Webmoney from "../assets/image/pay/webmoney.png";
+import Smsbill from "../assets/image/pay/smsbill.png";
 
 const Pay = () => {
   const token = localStorage.getItem("token");
@@ -48,9 +53,19 @@ const Pay = () => {
                 />
                 <img src={Qiwi} alt="Qiwi" className="payment-logo" />
                 <img src={Payyer} alt="Payyer" className="payment-logo" />
+                <img src={Wapkassa} alt="Wapkassa" className="payment-logo" />
+                <img src={FreeKassa} alt="FreeKassa" className="payment-logo" />
+                <img
+                  src={InterKassa}
+                  alt="InterKassa"
+                  className="payment-logo"
+                />
+                <img src={Webmoney} alt="Webmoney" className="payment-logo" />
+                <img src={Smsbill} alt="Smsbill" className="payment-logo" />
               </div>
+
               <hr />
-              <div className="nu">
+              <div className="">
                 <form action="?" method="post" className="payment-form">
                   <label htmlFor="amount" className="">
                     Miqdorni kiriting:
@@ -63,7 +78,7 @@ const Pay = () => {
                     step="0.01"
                     autoComplete="off"
                   />
-                  <p>sum</p>
+                  <label>sum</label>
                   <button
                     type="submit"
                     className="btn btn-success"

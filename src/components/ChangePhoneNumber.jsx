@@ -115,7 +115,7 @@ const ChangePhone = () => {
           <div className="title">Смена телефона</div>
           <div className="menu">
             {!codeSent ? (
-              <form onSubmit={handleGetCode}>
+              <form onSubmit={handleGetCode} className="change-data-form">
                 <p>Текущий номер: {oldPhone || "Yuklanmoqda..."}</p>
                 <label>Новый номер:</label>
                 <input

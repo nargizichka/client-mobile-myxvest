@@ -1378,3 +1378,19 @@ input.sw:checked + label {
 label {
   font-size: 12px;
 }
+.btn-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  font-size: 12px;
+}
+.inner-btn_group {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+.btn-group .link {
+  font-size: 15px;
+}

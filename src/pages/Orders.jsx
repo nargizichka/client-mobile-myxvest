@@ -148,7 +148,15 @@ const Orders = () => {
                           ↩ Продлить
                         </Link>
                         {/* <div className="vl"></div> */}
-                        <Link to={""} className="link">
+                        <Link
+                          to={"/change-package"}
+                          className="link"
+                          state={{
+                            packageId: pkg.id,
+                            currentTariffId: pkg.tariff.id,
+                            currentPayType: pkg.settings.pay.type,
+                          }}
+                        >
                           ♻ Изменить тарифа
                         </Link>
                       </div>
@@ -162,6 +170,7 @@ const Orders = () => {
                         </Link>
                       </div>
                     </div>
+                    <br />
                     {/* </div> */}
                   </>
                 );

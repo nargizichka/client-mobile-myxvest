@@ -37,6 +37,7 @@ import NotFound from "./pages/NoutFound";
 import EmailVerification from "./pages/EmailVerify";
 import PaymentConfirmation from "./pages/PaymentConfirmation";
 import PasswordRecovery from "./pages/PasswordRecovery";
+import ChangePackage from "./pages/ChangePackage";
 
 function App() {
   return (
@@ -157,7 +158,10 @@ function App() {
               path="/pay/confirmation"
               element={<PrivateRoute element={<PaymentConfirmation />} />}
             />
-
+            <Route
+              path="/change-package"
+              element={<PrivateRoute element={<ChangePackage />} />}
+            />
             <Route path="*" element={<NotFound />} />
           </Routes>
           <Footer />

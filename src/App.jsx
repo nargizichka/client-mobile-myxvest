@@ -157,6 +157,7 @@ function App() {
               path="/pay/confirmation"
               element={<PrivateRoute element={<PaymentConfirmation />} />}
             />
+
             <Route path="*" element={<NotFound />} />
           </Routes>
           <Footer />

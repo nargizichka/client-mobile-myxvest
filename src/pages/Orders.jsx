@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Up from "../assets/image/png/up.png";
 import { Link } from "react-router-dom";
-import Recycle from "../assets/image/png/recycle.png";
 const Orders = () => {
   const [purchasedPackages, setPurchasedPackages] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -46,19 +45,6 @@ const Orders = () => {
   }, [token]);
   console.log(user);
 
-  const getPriceLabel = (priceType) => {
-    switch (priceType) {
-      case "86400":
-        return "Kunlik";
-      case "2592000":
-        return "Oylik";
-      case "31536000":
-        return "Yillik";
-      default:
-        return "";
-    }
-  };
-
   if (loading) {
     return <p>Yuklanmoqda...</p>;
   }
@@ -91,6 +77,22 @@ const Orders = () => {
     };
   };
 
+  const sendToPanel = async (id) => {
+    try {
+      const response = await axios.get(
+        `https://api.sysdc.uz/api/v1/services/hosting/orders/panel-link/${id}/ispmanager`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      window.open(response.data.data.url, "_blank");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div>
       <div className="mOm">
@@ -109,8 +111,13 @@ const Orders = () => {
                 );
                 return (
                   <>
-                    <div key={index} className="menu">
-                      <p>Заказ №: {pkg.id}</p>
+                    <div key={index} className="menu orders">
+                      <div className="setting-block">
+                        <p>Заказ №: {pkg.id}</p>
+                        <Link to="/package-settings" className="link">
+                          ⚒ Настройки
+                        </Link>
+                      </div>
                       <p>Тариф заказа: {pkg?.tariff?.name}</p>
                       <p>Баланс: {user?.accounts.amount} сум</p>
                       {/* <p>Тариф: {getPriceLabel(pkg.settings.pay.type)}</p> */}
@@ -128,7 +135,11 @@ const Orders = () => {
                         className="menu"
                         style={{ width: "100%", textAlign: "center" }}
                       >
-                        <Link to={""} className="link">
+                        <Link
+                          to={""}
+                          onClick={() => sendToPanel(pkg.id)}
+                          className="link"
+                        >
                           {"</> "}Доступ к панели
                         </Link>
                       </div>

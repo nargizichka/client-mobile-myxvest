@@ -1391,6 +1391,12 @@ label {
   display: flex;
   justify-content: space-around;
 }
+.orders,
 .btn-group .link {
   font-size: 15px;
+}
+.orders .setting-block {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
 }

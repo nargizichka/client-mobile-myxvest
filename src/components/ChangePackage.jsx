@@ -64,6 +64,7 @@ const ChangePackage = () => {
 
   const handleCancel = () => {
     setShowConfirmation(false);
+    setError(null);
   };
 
   const getCharacteristic = (pkg, key) => {

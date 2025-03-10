@@ -38,6 +38,7 @@ import EmailVerification from "./pages/EmailVerify";
 import PaymentConfirmation from "./pages/PaymentConfirmation";
 import PasswordRecovery from "./pages/PasswordRecovery";
 import ChangePackage from "./pages/ChangePackage";
+import ExtendPackage from "./pages/ExtendPackage";
 
 function App() {
   return (
@@ -162,6 +163,11 @@ function App() {
               path="/change-package"
               element={<PrivateRoute element={<ChangePackage />} />}
             />
+            <Route
+              path="/extend-package"
+              element={<PrivateRoute element={<ExtendPackage />} />}
+            />
+
             <Route path="*" element={<NotFound />} />
           </Routes>
           <Footer />

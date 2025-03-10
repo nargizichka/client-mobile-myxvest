@@ -54,7 +54,7 @@ const ChangePackage = () => {
       );
       navigate("/my_orders");
     } catch (err) {
-      setError("Failed to change package.");
+      setError(err.response.data.errors);
     }
   };
   const handleSetSelectedPackageAndConfimration = (pkgId) => {
@@ -90,10 +90,6 @@ const ChangePackage = () => {
 
   if (loading) {
     return <p>Loading...</p>;
-  }
-
-  if (error) {
-    return <p>{error}</p>;
   }
 
   return (
@@ -186,22 +182,33 @@ const ChangePackage = () => {
         <div className="modal">
           <div className="modal-content">
             <div className="title">Tarifni o&apos;zgartirishni tasdiqlash</div>
-            <p className="menu">
-              Siz {selectedPackageDetails.name} tarifini{" "}
-              {selectedPackageDetails.price[filter]} UZS evaziga{" "}
-              {getPriceLabel(filter)} uchun o&apos;zgartirmoqchisiz,
-              <br /> Ishonchingiz komilmi? <br /> Buyurtmani
-              o&apos;zgartirishdan keyin, sizning buyurtmangizni hozirgi amal
-              qilish muddati o&apos;z kuchini yo&apos;qotadi.
-            </p>
-            <div className=" menu modal_btns">
-              <button onClick={handleSubmit} className="btn btn-success">
-                Tasdiqlash
-              </button>
-              <button onClick={handleCancel} className="btn btn-danger">
-                Bekor qilish
-              </button>
-            </div>
+            {!error ? (
+              <>
+                <p className="menu">
+                  Siz {selectedPackageDetails.name} tarifini{" "}
+                  {selectedPackageDetails.price[filter]} UZS evaziga{" "}
+                  {getPriceLabel(filter)} uchun o&apos;zgartirmoqchisiz,
+                  <br /> Ishonchingiz komilmi? <br /> Buyurtmani
+                  o&apos;zgartirishdan keyin, sizning buyurtmangizni hozirgi
+                  amal qilish muddati o&apos;z kuchini yo&apos;qotadi.
+                </p>
+                <div className=" menu modal_btns">
+                  <button onClick={handleSubmit} className="btn btn-success">
+                    Tasdiqlash
+                  </button>
+                  <button onClick={handleCancel} className="btn btn-danger">
+                    Bekor qilish
+                  </button>
+                </div>
+              </>
+            ) : (
+              <div className="menu">
+                <p className="  alert text-danger">{error}</p>
+                <button onClick={handleCancel} className="btn btn-danger">
+                  Yopish
+                </button>
+              </div>
+            )}
           </div>
         </div>
       )}

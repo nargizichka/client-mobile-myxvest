@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Up from "../assets/image/png/up.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
 const Orders = () => {
   const [purchasedPackages, setPurchasedPackages] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [user, setUser] = useState(null);
   const token = localStorage.getItem("token");
+  const navigate = useNavigate();
+
   useEffect(() => {
     const fetchPurchasedPackages = async () => {
       try {
@@ -52,6 +55,7 @@ const Orders = () => {
   if (error) {
     return <p>{error}</p>;
   }
+
   const calculateRemainingDays = (expiresAt) => {
     const expirationDate = new Date(expiresAt);
     const currentDate = new Date();
@@ -114,13 +118,12 @@ const Orders = () => {
                     <div key={index} className="menu orders">
                       <div className="setting-block">
                         <p>Заказ №: {pkg.id}</p>
-                        <Link to="/package-settings" className="link">
+                        {/* <Link to="/package-settings" className="link">
                           ⚒ Настройки
-                        </Link>
+                        </Link> */}
                       </div>
                       <p>Тариф заказа: {pkg?.tariff?.name}</p>
                       <p>Баланс: {user?.accounts.amount} сум</p>
-                      {/* <p>Тариф: {getPriceLabel(pkg.settings.pay.type)}</p> */}
                       <p>Статус: {pkg.status}</p>
                       <p>
                         Осталось:{" "}
@@ -129,7 +132,6 @@ const Orders = () => {
                         </span>
                       </p>
                     </div>
-                    {/* <div className="menu"> */}
                     <div className="menu btn-group">
                       <div
                         className="menu"
@@ -144,10 +146,13 @@ const Orders = () => {
                         </Link>
                       </div>
                       <div className="menu inner-btn_group">
-                        <Link to={""} className="link">
+                        <Link
+                          to="/extend-package"
+                          className="link"
+                          state={{ packageId: pkg.id }}
+                        >
                           ↩ Продлить
                         </Link>
-                        {/* <div className="vl"></div> */}
                         <Link
                           to={"/change-package"}
                           className="link"
@@ -160,18 +165,16 @@ const Orders = () => {
                           ♻ Изменить тарифа
                         </Link>
                       </div>
-                      <div className="menu inner-btn_group">
+                      {/* <div className="menu inner-btn_group">
                         <Link to={""} className="link">
                           ⇄ Передать заказ
                         </Link>
-                        {/* <div className="vl"></div> */}
                         <Link to={""} className="link" style={{ color: "red" }}>
                           ✘ Удалить заказ
                         </Link>
-                      </div>
+                      </div> */}
                     </div>
                     <br />
-                    {/* </div> */}
                   </>
                 );
               })
